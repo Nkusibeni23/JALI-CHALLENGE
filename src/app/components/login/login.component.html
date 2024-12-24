@@ -1,0 +1,153 @@
+<div class="flex items-center justify-center min-h-screen bg-gray-900">
+  <div
+    class="flex items-center justify-center mt-24 w-full max-w-2xl sm:p-2 md:p-0"
+  >
+    <form
+      [formGroup]="authForm"
+      class="bg-gray-800 p-8 rounded-xl shadow-lg w-full"
+    >
+      <h2 class="text-4xl font-bold mb-6 text-white text-center">
+        {{ isLogin ? "Login" : "Sign Up" }}
+      </h2>
+      <div *ngIf="!isLogin" class="mb-6">
+        <div class="mb-6">
+          <label for="email" class="block text-sm font-medium text-gray-400">
+            First Name
+          </label>
+          <input
+            type="text"
+            id="firstName"
+            formControlName="firstName"
+            placeholder="Enter Your First Name"
+            class="mt-1 p-3 bg-gray-700 border border-gray-600 text-gray-300 rounded-md w-full outline-none focus:border-primary focus:ring-2 focus:ring-primary"
+          />
+          <div
+            *ngIf="
+              authForm.get('phone')?.invalid &&
+              (authForm.get('phone')?.touched || authForm.get('email')?.dirty)
+            "
+            class="mt-2"
+          >
+            <small class="text-red-500">first name can't be empty.</small>
+          </div>
+        </div>
+        <div class="mb-6">
+          <label for="email" class="block text-sm font-medium text-gray-400">
+            Last Name
+          </label>
+          <input
+            type="text"
+            id="lastName"
+            formControlName="lastName"
+            placeholder="Enter Your Last Name"
+            class="mt-1 p-3 bg-gray-700 border border-gray-600 text-gray-300 rounded-md w-full outline-none focus:border-primary focus:ring-2 focus:ring-primary"
+          />
+          <div
+            *ngIf="
+              authForm.get('phone')?.invalid &&
+              (authForm.get('phone')?.touched || authForm.get('email')?.dirty)
+            "
+            class="mt-2"
+          >
+            <small class="text-red-500">first name can't be empty.</small>
+          </div>
+        </div>
+      </div>
+      <div class="mb-6">
+        <label for="email" class="block text-sm font-medium text-gray-400">
+          Phone Number
+        </label>
+        <input
+          type="email"
+          id="email"
+          formControlName="phone"
+          placeholder="+(250) 780 900 039"
+          class="mt-1 p-3 bg-gray-700 border border-gray-600 text-gray-300 rounded-md w-full outline-none focus:border-primary focus:ring-2 focus:ring-primary"
+        />
+        <div
+          *ngIf="
+            authForm.get('phone')?.invalid &&
+            (authForm.get('phone')?.touched || authForm.get('email')?.dirty)
+          "
+          class="mt-2"
+        >
+          <small class="text-red-500">phone can't be empty.</small>
+        </div>
+      </div>
+
+      <div class="mb-6">
+        <label for="password" class="block text-sm font-medium text-gray-400">
+          Password
+        </label>
+        <input
+          type="password"
+          id="password"
+          formControlName="password"
+          placeholder="Enter your password"
+          class="mt-1 p-3 bg-gray-700 border border-gray-600 text-gray-300 rounded-md w-full outline-none focus:border-primary focus:ring-2 focus:ring-primary"
+        />
+        <div
+          *ngIf="
+            authForm.get('password')?.invalid &&
+            (authForm.get('password')?.touched ||
+              authForm.get('password')?.dirty)
+          "
+          class="mt-2"
+        >
+          <small class="text-red-500">
+            Password must be at least 6 characters long.
+          </small>
+        </div>
+      </div>
+
+      <div *ngIf="!isLogin" class="mb-6">
+        <label
+          for="repeatPassword"
+          class="block text-sm font-medium text-gray-400"
+        >
+          Confirm Password
+        </label>
+        <input
+          type="password"
+          id="repeatPassword"
+          formControlName="repeatPassword"
+          placeholder="Confirm your password"
+          class="mt-1 p-3 bg-gray-700 border border-gray-600 text-gray-300 rounded-md w-full outline-none focus:border-primary focus:ring-2 focus:ring-primary"
+        />
+        <div
+          *ngIf="
+            authForm.get('repeatPassword')?.invalid &&
+            (authForm.get('repeatPassword')?.touched ||
+              authForm.get('repeatPassword')?.dirty)
+          "
+          class="mt-2"
+        >
+          <small class="text-red-500">Repeat password can't be empty.</small>
+        </div>
+
+        <div *ngIf="authForm.errors?.['mismatch']" class="mt-2">
+          <small class="text-red-500">Passwords must match.</small>
+        </div>
+      </div>
+
+      <button
+        type="submit"
+        (click)="onSubmit()"
+        class="w-full bg-gray-100 text-black py-3 rounded-lg hover:bg-gray-400 transition-colors duration-300 font-bold disabled:opacity-50 disabled:cursor-not-allowed"
+        [disabled]="authForm.invalid"
+      >
+        {{ isLogin ? "Login to your account" : "Create an account" }}
+      </button>
+
+      <p class="text-center mt-6 text-gray-400">
+        {{ isLogin ? "Need an account?" : "Already have an account?" }}
+        <span
+          class="text-primary font-bold cursor-pointer"
+          (click)="toggleForm()"
+        >
+          {{ isLogin ? " Sign Up" : " Login" }}
+        </span>
+      </p>
+    </form>
+  </div>
+</div>
